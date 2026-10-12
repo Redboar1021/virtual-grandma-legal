@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="バーチャル婆ちゃんのメールアドレス確認">
+  <title>メールアドレスの確認 | バーチャル婆ちゃん</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <a class="brand" href="./">バーチャル婆ちゃん</a>
+    <h1 id="title">メールアドレスを確認しました</h1>
+    <p id="message">アプリに戻り、登録したメールアドレスとパスワードでログインしてください。</p>
+    <p>うまくログインできない場合は、<a href="mailto:kazuyaman1021@gmail.com">サポート</a>へご連絡ください。パスワードは送らないでください。</p>
+  </main>
+  <script>
+    const params = new URLSearchParams(location.hash.slice(1));
+    const query = new URLSearchParams(location.search);
+    if (params.has('error') || params.has('error_code') || query.has('error') || query.has('error_code')) {
+      document.getElementById('title').textContent = 'メールアドレスを確認できませんでした';
+      document.getElementById('message').textContent = '確認リンクの期限が切れている可能性があります。アプリからもう一度登録を試してください。';
+    }
+    history.replaceState(null, '', location.pathname);
+  </script>
+</body>
+</html>
